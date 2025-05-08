@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Student Manager">
+        <div class="slds-p-around_medium">
+            
+            <lightning-input label="Name" value={name} onchange={handleNameChange}></lightning-input>
+            <lightning-input label="Age" type="number" value={age} onchange={handleAgeChange}></lightning-input>
+            <lightning-input label="Grade" value={grade} onchange={handleGradeChange}></lightning-input>
+            <lightning-button label="Add Student" onclick={addStudent} class="slds-m-top_small"></lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            
+            <lightning-combobox
+                name="gradeFilter"
+                label="Filter by Grade"
+                value={selectedGrade}
+                options={gradeOptions}
+                onchange={handleFilterChange}>
+            </lightning-combobox>
+        </div>
+
+        <lightning-datatable
+            key-field="Id"
+            data={students}
+            columns={columns}>
+        </lightning-datatable>
+    </lightning-card>
+</template>

@@ -1,0 +1,35 @@
+<template>
+  <c-case-filter onfilterschange={handleFilterChange}></c-case-filter>
+
+ 
+  <lightning-card class="slds-m-around_medium">
+      <div class="slds-p-around_medium slds-text-align_center">
+          <lightning-button 
+              label="New Case"
+              variant="brand-outline"
+              title="Create a new case"
+              icon-name="utility:add"
+              icon-position="left"
+              onclick={handleNewCase}
+              class="custom-new-button">
+          </lightning-button>
+      </div>
+  </lightning-card>
+
+  <c-case-list
+      status={selectedStatus}
+      priority={selectedPriority}
+      origin={selectedOrigin}
+      onview={handleView}
+      onedit={handleEdit}
+      ondelete={handleDelete}>
+  </c-case-list>
+
+  <c-case-form-modal 
+      record-id={selectedCaseId}
+      is-open={isFormOpen}
+      is-read-only={isReadOnly}
+      oncasesaved={refreshCaseList}
+      onclose={handleModalClose}>
+  </c-case-form-modal>
+</template>

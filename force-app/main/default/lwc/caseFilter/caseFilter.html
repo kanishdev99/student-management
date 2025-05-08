@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Filter Cases">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning-combobox
+                    label="Status"
+                    name="status"
+                    value={status}
+                    options={statusOptions}
+                    onchange={handleChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col">
+                <lightning-combobox
+                    label="Priority"
+                    name="priority"
+                    value={priority}
+                    options={priorityOptions}
+                    onchange={handleChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col">
+                <lightning-combobox
+                    label="Origin"
+                    name="origin"
+                    value={origin}
+                    options={originOptions}
+                    onchange={handleChange}>
+                </lightning-combobox>
+            </div>
+        </div>
+    </lightning-card>
+</template>

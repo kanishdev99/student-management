@@ -1,0 +1,25 @@
+<template>
+    <template if:true={cases}>
+        <div class="slds-grid slds-wrap">
+            <template for:each={cases} for:item="c">
+                <div key={c.Id} class="slds-col slds-size_1-of-3 slds-p-around_small">
+                    <lightning-card title={c.Subject} icon-name="standard:case">
+                        <p class="slds-p-horizontal_small">Case #: {c.CaseNumber}</p>
+                        <p class="slds-p-horizontal_small">Status: {c.Status}</p>
+                        <p class="slds-p-horizontal_small">Priority: {c.Priority}</p>
+                        <p class="slds-p-horizontal_small">Origin: {c.Origin}</p>
+                        <div class="slds-p-horizontal_small slds-m-top_small">
+                            <lightning-button variant="brand" label="View" data-id={c.Id} data-action="view" onclick={handleClick}></lightning-button>
+                            <lightning-button variant="neutral" label="Edit" data-id={c.Id} data-action="edit" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button variant="destructive" label="Delete" data-id={c.Id} data-action="delete" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                        </div>
+                        
+                    </lightning-card>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:true={error}>
+        <p>Error loading cases.</p>
+    </template>
+</template>
