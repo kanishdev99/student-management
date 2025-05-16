@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="My Events">
+        <template if:true={user}>
+            <p class="slds-p-around_small">Welcome, <strong>{user.Name}</strong></p>
+        </template>
+
+        <template if:true={registrations.length}>
+            <lightning-datatable
+                key-field="Id"
+                data={registrations}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={showNoData}>
+            <p class="slds-p-around_small">You have no registered events.</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,93 @@
+<template>
+    <div class="slds-box slds-p-around_medium" style="background-color: white;">
+        <!-- Filter and search section -->
+        <lightning-combobox
+            label="Filter by Event Type"
+            value={selectedType}
+            options={typeOptions}
+            onchange={handleTypeChange}>
+        </lightning-combobox>
+
+        <lightning-input
+            type="search"
+            label="Search Events"
+            value={searchKey}
+            onchange={handleSearchChange}
+            class="slds-m-top_small">
+        </lightning-input>
+
+        <!-- Events Table -->
+        <template if:true={events}>
+            <div class="slds-m-top_medium" style="overflow-x: auto;">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered" style="min-width: 100%;">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={events} for:item="event">
+                            <tr key={event.Id}>
+                                <td>{event.Name}</td>
+                                <td>{event.Event_Date__c}</td>
+                                <td>{event.Event_Type__c}</td>
+                                <td>{event.Location__c}</td>
+                                <td>{event.Description__c}</td>
+                                <td>
+                                    <lightning-button 
+                                        label="Register Now" 
+                                        style="--slds-c-button-brand-color-background: green; --slds-c-button-text-color: white;"
+                                        variant="brand"
+                                        onclick={handleOpenRegister} 
+                                        data-id={event.Id}>
+                                    </lightning-button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </div>
+
+    <!-- Registration Modal -->
+    <template if:true={showRegistrationForm}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">Register Attendee</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={isAdmin}>
+                        <lightning-combobox
+                            name="user"
+                            label="Select User"
+                            value={selectedUserId}
+                            placeholder="Select a user"
+                            options={userOptions}
+                            onchange={handleUserChange}>
+                        </lightning-combobox>
+
+                        <lightning-input
+                            name="attendeeEmail"
+                            label="Attendee Email"
+                            type="email"
+                            value={attendeeEmail}
+                            onchange={handleEmailChange}>
+                        </lightning-input>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeRegistrationForm}></lightning-button>
+                    <lightning-button variant="brand" label="Register" onclick={handleRegister}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
